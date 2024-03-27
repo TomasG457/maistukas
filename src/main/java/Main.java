@@ -2,7 +2,6 @@ import istaiga.Istaiga;
 import istaiga.IstaigaDAO;
 import vartotojas.Vartotojas;
 import vartotojas.VartotojasDAO;
-
 import java.util.Scanner;
 
 public class Main {
@@ -12,15 +11,16 @@ public class Main {
         while (arVeikia) {
             System.out.println("*** Maisto užsakymo programa \"Maistukas\" ***.\n\n" +
                     "Įveskite pasirinktą veiksmą ( 1 arba 2 ):" +
-                    "\n >>> 1. REGISTRACIJA" +
-                    "\n >>> 2. PRISIJUNGIMAS\n");
+                    "\n >>> [1] REGISTRACIJA" +
+                    "\n >>> [2] PRISIJUNGIMAS\n" +
+                    "Pasirinkimas: ");
             Scanner ivestis1 = new Scanner(System.in);
             int arReg = ivestis1.nextInt();
 
-            if (arReg == 1) {
+            if (arReg == 2) {
                 System.out.println();
                 break;
-            } else if (arReg == 2) {
+            } else if (arReg == 1) {
                 System.out.println("Administratorius (įveskite 1) ar klientas (įveskite 2)?");
                 Scanner ivestis3 = new Scanner(System.in);
                 int role = ivestis3.nextInt();
@@ -30,32 +30,24 @@ public class Main {
                     System.out.println("Vardas?");
                     Scanner ivestis4 = new Scanner(System.in);
                     String vardas = ivestis4.nextLine();
-                    System.out.println("Pavardė? ");
-                    String pavarde = ivestis4.nextLine();
                     System.out.println("El. paštas?");
                     String email = ivestis4.nextLine();
-                    System.out.println("Pseudonimas?");
-                    String pseudonimas = ivestis4.nextLine();
                     System.out.println("Slaptažodis?");
                     String slaptazodis = ivestis4.nextLine();
 
 
-                    vartotojas1 = new Vartotojas(vardas, pavarde, email, role, pseudonimas, slaptazodis);
+                    vartotojas1 = new Vartotojas(vardas, email, role, slaptazodis);
                 } else if (role == 2) {
                     System.out.println("Vardas?");
                     Scanner ivestis4 = new Scanner(System.in);
                     String vardas = ivestis4.nextLine();
-                    System.out.println("Pavardė? ");
-                    String pavarde = ivestis4.nextLine();
                     System.out.println("El. paštas?");
                     String email = ivestis4.nextLine();
-                    System.out.println("Pseudonimas?");
-                    String pseudonimas = ivestis4.nextLine();
                     System.out.println("Slaptažodis?");
                     String slaptazodis = ivestis4.nextLine();
 
 
-                    vartotojas1 = new Vartotojas(vardas, pavarde, email, role, pseudonimas, slaptazodis);
+                    vartotojas1 = new Vartotojas(vardas, email, role, slaptazodis);
                 } else {
                     System.out.println("Tokio pasirinkimo nėra");
                 }
@@ -64,7 +56,7 @@ public class Main {
             } else {
                 System.out.println("Tokio pasirinkimo nėra");
             }
-        }//pradinis while
+        }
 
         while (arVeikia) {
             System.out.println("Meniu\n Pridėti maitinimo įstaigą - įveskite 1\n Ieškoti maitinimo įstaigos - įveskite 2");
@@ -80,12 +72,8 @@ public class Main {
             } else {
                 System.out.println("Tokio pasirinkimo nėra");
             }
-        }//dashboard while
-
-
-
-    }//main
-
+        }
+    }
 
     static void ieskotiIstaigos(){
         System.out.println("Įstaigos paieška DB-ėje pagal miestą. \nĮveskite miestą, kuriame norite ieškoti:");
@@ -93,7 +81,6 @@ public class Main {
         String miestas = ivestis.nextLine();
         IstaigaDAO.ieskotiIstaigos(miestas);
     }
-
 
     static void kurtiIstaiga(){
         System.out.println("Įstaigos pavadinimas?");
@@ -106,12 +93,9 @@ public class Main {
         String adresas = ivestis1.nextLine();
 
         Istaiga istaiga1 = new Istaiga(pavadinimas, kodas, adresas);
-        IstaigaDAO.kurti(istaiga1);
-    }//kurtiIstaiga
-
-
+        IstaigaDAO.kurtiIstaiga(istaiga1);
+    }
     static void kurtiVartotoja(Vartotojas vartotojas){
-
-        VartotojasDAO.kurti(vartotojas);
+        VartotojasDAO.kurtiVartotoja(vartotojas);
     }
 }

@@ -5,12 +5,9 @@ import java.util.ArrayList;
 
 public class IstaigaDAO {
     public static final String URL = "jdbc:mysql://localhost:3306/maistukas";
+    public static void kurtiIstaiga(Istaiga istaiga){
 
-    public static void kurti(Istaiga istaiga){
-
-        String query = "INSERT INTO istaigos(`pavadinimas`, `kodas`, `adresas`) " +        "VALUES(?,?,?)";
-
-
+        String query = "INSERT INTO istaigos(`pavadinimas`, `kodas`, `adresas`) " + "VALUES(?,?,?)";
         try {
             Connection connection = DriverManager.getConnection(URL, "root", "");
 
@@ -36,8 +33,8 @@ public class IstaigaDAO {
 
 
 
-    public static void ieskotiIstaigos(String miestas) {
-        String uzklausa = "SELECT * FROM `istaigos` WHERE `adresas` LIKE '%" + miestas + "%'";
+    public static void ieskotiIstaigos(String adresas) {
+        String uzklausa = "SELECT * FROM `istaigos` WHERE `adresas` LIKE '%" + adresas + "%'";
 
         try {
             Connection connection = DriverManager.getConnection(URL, "root", "");
@@ -51,13 +48,13 @@ public class IstaigaDAO {
                 int id = resultSet.getInt("id");
                 String pavadinimas = resultSet.getString("pavadinimas");
                 int kodas = resultSet.getInt("kodas");
-                String adresas = resultSet.getString("adresas");
+                adresas = resultSet.getString("adresas");
 
                 istaigos.add(new Istaiga(id, pavadinimas, kodas, adresas));
             }
 
             if (istaigos.isEmpty()){
-                System.out.println("Įstaigų iš šio miesto: " + miestas + " DB-ėje rasti nepavyko.");
+                System.out.println("Įstaigų iš šio miesto: " + adresas + " DB-ėje rasti nepavyko.");
             }
             else {
                 System.out.println("Rastos tokios įstaigos: \n");
@@ -69,5 +66,5 @@ public class IstaigaDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    } //ieskotiIstaigos galas
+    }
 }
