@@ -66,7 +66,7 @@ public class Main {
             }
         }//pradinis while
 
-        while (arVeikia == true) {
+        while (arVeikia) {
             System.out.println("Meniu\n Pridėti maitinimo įstaigą - įveskite 1\n Ieškoti maitinimo įstaigos - įveskite 2");
             Scanner ivestis2 = new Scanner(System.in);
             int admMeniu = ivestis2.nextInt();
